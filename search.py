@@ -9,8 +9,8 @@ from langchain.vectorstores.base import VectorStore
 from pydantic import BaseModel, Field
 from langchain.chains.base import Chain
 
-OPENAI_API_KEY = os.environ['OPENAI_API_KEY'] = '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'
-SERPAPI_API_KEY = os.environ['SERPAPI_API_KEY'] = '9dec17c9de26a133ca6129f88a0667745e050e35b8e6f2d397a3a1b175327ef4'
+OPENAI_API_KEY = os.environ['OPENAI_API_KEY'] = ''
+SERPAPI_API_KEY = os.environ['SERPAPI_API_KEY'] = ''
 
 
 from langchain.docstore import InMemoryDocstore
