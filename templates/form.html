@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Generate Text</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+
+</head>
+<body>
+    <div class="form-container">
+        <h1>Enter Input</h1>
+        <form method="post" action="{{ url_for('home') }}">
+            <label for="input-string">Input String:</label>
+            <input type="text" id="input-string" name="input_string">
+            <button type="submit">Generate Text</button>
+        </form>
+    </div>
+    <div class="results-container">
+        <h1>Results for "{{ input_string }}"</h1>
+        <div>
+            {% for item in output_list %}
+            <p class="typewriter">{{ item }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        // Get all list items
+        var items = $(".typewriter");
+        // Hide all list items initially
+        items.hide();
+        // Define a delay time between each typewriter effect display
+        var delay = 40;
+        // Loop through each list item and show them with a typewriter effect
+        function addText(i) {
+            var item = items.eq(i);
+            var text = item.text();
+            var length = text.length;
+            var count = 0;
+            item.empty();
+            // Define a function to add the typewriter effect
+            function addChar() {
+                item.text(text.substring(0, count));
+                count++;
+                if (count <= length) {
+                    setTimeout(addChar, delay);
+                } else {
+                    // Show the next list item after a delay
+                    i++;
+                    if (i < items.length) {
+                        setTimeout(function() {
+                            addText(i);
+                        }, delay * 10);
+                    }
+                }
+            }
+            setTimeout(addChar, delay);
+            item.show();
+        }
+        // Start the typewriter effect with the first list item
+        addText(0);
+    </script>
+</body>
+</html>
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Generate Text</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Enter Input</h1>
+        <form method="post" action="{{ url_for('home') }}">
+            <label for="input-string">Input String:</label>
+            <input type="text" id="input-string" name="input_string">
+            <button type="submit">Generate Text</button>
+        </form>
+    </div>
+    <div class="results-container">
+        <h1>Results for "{{ input_string }}"</h1>
+        <div>
+            {% for item in output_list %}
+            <p class="typewriter">{{ item }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        // Get all list items
+        var items = $(".typewriter");
+        // Hide all list items initially
+        items.hide();
+        // Define a delay time between each typewriter effect display
+        var delay = 50;
+        // Loop through each list item and show them with a typewriter effect
+        function addText(i) {
+            var item = items.eq(i);
+            var text = item.text();
+            var length = text.length;
+            var count = 0;
+            item.empty();
+            // Define a function to add the typewriter effect
+            function addChar() {
+                item.text(text.substring(0, count));
+                count++;
+                if (count <= length) {
+                    setTimeout(addChar, delay);
+                } else {
+                    // Show the next list item after a delay
+                    i++;
+                    if (i < items.length) {
+                        setTimeout(function() {
+                            addText(i);
+                        }, delay * 10);
+                    }
+                }
+            }
+            setTimeout(addChar, delay);
+            item.show();
+        }
+        // Start the typewriter effect with the first list item
+        addText(0);
+    </script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html> -->
